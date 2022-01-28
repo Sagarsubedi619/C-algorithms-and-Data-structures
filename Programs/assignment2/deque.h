@@ -1,80 +1,167 @@
 #ifndef H_Deque
 #define H_Deque
-
 #include <iostream>
+#include "deque_node.h"
 using namespace std;
+
+
+
 
 template <class T>
 class deque
 {
-    public:
-        const deque<T>& operator=(const deque<T>&):
-        T front()const;
-        T back()const;
-        void push_front(const T& assignedElement);
-        void push_back(const T& assignedElement);
-        void pop_front();
-        void pop_back();
-        bool empty() const;
-
-        deque(int dequeSize=20);
-        deque(const deque<T>& otherQueue);
-        ~deque();
-
-    private:
-        int maxQueuesize;
-        int count;
-        int queueFront;
-        int queueRear;
-
-        T *first;
+      deque_node<T>* Front;
+    deque_node<T>* Rear;
+    int Size;
     
-        T *last;
+    public:
+       
+        deque(){
+            Front=NULL;
+            Rear=NULL;
+            Size=0;
+            }
+        //constructor
+        deque(const deque<T>& otherQueue);
+        //copy constructor
+        ~deque();
+        //destructor
+        const deque<T>& operator=(const deque<T>&);
+         //Overload the assignment operator.
+        T front();
+        //return front element
+        T back();
+        //return back element
+        bool empty() const;
+        //check weather the queue is empty
+        void  push_front(const T& assignedElement);
+        //push elements in front
+        void push_back(const T& assignedElement);
+        //push elements at back
+        void pop_front();
+        //delete front element
+        void pop_back();
+        //delete back element
 
-
+        
 };
-
-template <class T>
-T deque<T>::front() const
-{
-    return queueRear;
-
-}
-
-template <class T>
-T deque<T>::back() const
-{
-    return queueFront;
-
-}
-
-template <class T>
-void deque<T>::push_front(const T& newElement)
-{
-
-}
-template <class T>
-void deque<T>::push_back(const T& newElement)
-{
-
-}
-template <class T>
-void deque<T>::pop_front()
-{
-
-}
-template <class T>
-void deque<T>::pop_back()
-{
-
-}
-template <class T>
+template<class T>
 bool deque<T>::empty() const
 {
-    return (count==0);
+return(Size==0);
+}
+
+template<class T>
+void deque<T>::push_front(const T& assignedElement)
+{
+    deque_node<T>* newNode=deque_node<T>::getnode(assignedElement);
+    if(newNode==NULL){
+        cout<<"error";
+    }
+    else
+    {
+        if(Front==NULL)
+        {
+            Rear=newNode;
+            Front=newNode;
+        }
+        else
+        {
+            newNode->next=Front;
+            Front->prev=newNode;
+            Front=newNode;
+
+            //assign respective pointers
+        }
+        Size++;
+    }
+}
+
+template<class T>
+void deque<T>::push_back(const T& assignedElement)
+{
+     deque_node<T>* newNode=deque_node<T>::getnode(assignedElement);
+     if(newNode==NULL){
+        cout<<"overflow\n";
+    }
+    else
+    {
+        if(Rear==NULL)
+        {
+            Front=newNode;
+            Rear=newNode;
+        }
+        else
+        {
+            newNode->prev=Rear;
+            Rear->next=newNode;
+            Rear=newNode;
+            //assign respective pointers
+        }
+        Size++;
+    }
+
+}
+
+template<class T>
+void deque<T>::pop_front()
+{
+    if(empty())
+    {
+        cout<<"Underflow\n";
+    }
+    else
+    {
+        deque_node<T>* temp=Front;
+        Front=Front->next;
+        if(Front==NULL){Rear=NULL;}
+        else{Front->prev=NULL;}
+        //reassigning pointers
+        free(temp);
+        Size--;
+
+    }
+
+}
+
+template<class T>
+void deque<T>::pop_back()
+{
+    if(empty())
+    {
+        cout<<"Underflow\n";
+    }
+    else
+    {
+        deque_node<T>* temp=Rear;
+        Rear=Rear->prev;
+        if(Rear==NULL){Front=NULL;}
+        else{Rear->next=NULL;}
+        //reassigning pointers
+        free(temp);
+        Size--;
+
+    }
+
+}
+
+template<class T>
+T deque<T>::front()
+{
+    if(empty()){return -1;}
+    else{return Front->data;}
+
+}
+
+template<class T>
+T deque<T>::back()
+{
+    if(empty()){return -1;}
+    else{return Rear->data;}
 
 }
 
 
 
 #endif
+
