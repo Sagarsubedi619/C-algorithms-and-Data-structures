@@ -1,0 +1,13 @@
+Arrays are the dynamic list of < any data types>. When elements are in the array it is easy to read the the elements by position. However, what if the
+the elements to be inserted are more than the max size of array? we have to create a new array that could be double the size of first array and copy all
+the elements of first array to new array also free up the space of previous array. This process is costly interms of memory and time. 
+Although access to elements by index is efficient in arrays which is O(n), the insert, remove and add coostly interms of Time. Time is inversly
+proportioonal to the number of elemets in the list O(n).
+
+ An Array, Arr  = 1 | 2 | 3 | 4 | | |  ---> Here, i)if we want to add an element to Arr[0], we need to move all three elements from arr[1] to one step right
+                                                  ii) if we want to delete the element at Arr[1] we need too move Arr[2]&Arr[3] to left.
+                                                  iii) In this case arr[4]&arr[5] are unused and waste of memory
+                                                  iv) Arr[3] is 4, the way this works is
+                                                      base starting memory+index*memory size taken by types int is 4 bytes
+                                                      lets say starting memory is 100 and type is int
+                                                      A[3]= 100+3*4= 112 and it returns the element at address 112
