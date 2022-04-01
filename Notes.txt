@@ -11,3 +11,19 @@ proportioonal to the number of elemets in the list O(n).
                                                       base starting memory+index*memory size taken by types int is 4 bytes
                                                       lets say starting memory is 100 and type is int
                                                       A[3]= 100+3*4= 112 and it returns the element at address 112
+                                                      
+Linked List: See the coding implementation SimpleLinkedList.cpp
+
+|Data|addressof next node2|-->|Data|addressof next node3|-->|Data|addressof next node4|-->|Data|addressof next node=0|
+
+
+When to use what?
+* Arrays - When there is frequent accesing of elements is required
+* If the data part of a linked list takes a lot of memory linked list will consume more memory.
+* Arrays- Depends how much the memory is unused.
+* Arrays- If we declare a large array , memory might not be available in a large block
+* Linked list - Memory will always be available since it is a  small block
+
+
+
+When the number of stack frame go beyond the size of allocated memory of a stack it is called stack overflow.
