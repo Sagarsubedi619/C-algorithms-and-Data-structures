@@ -1,5 +1,5 @@
 // File:      token.h
-// Author:    Dan Brekke
+
 // This file contains the specification for the token class.  
 #ifndef TOKEN_CLASS
 #define TOKEN_CLASS
